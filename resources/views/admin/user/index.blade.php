@@ -29,8 +29,8 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->role}}</td>
                         <td>
-                            <a class="btn btn-warning btn-sm mx-1" href="{{$user->id}}/edit">Edit</a>
-                            <form action="{{$user->id}}" method="POST" class="d-inline mx-1">
+                            <a class="btn btn-warning btn-sm mx-1" href="user/{{$user->id}}/edit">Edit</a>
+                            <form action="user/{{$user->id}}" method="POST" class="d-inline mx-1">
                                 @method('delete')
                                 @csrf
                                 <button class="btn btn-danger btn-sm" type="submit"
