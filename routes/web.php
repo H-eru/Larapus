@@ -19,3 +19,17 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/{id}', 'Admin\UserManagementController@destroy');
     });
 });
+
+Route::group(['prefix' => 'karyawan'], function () {
+    Route::get('/', 'Karyawan\DashboardKaryawanController@index');
+
+    Route::group(['prefix' => 'rak'], function () {
+        Route::get('/', 'Karyawan\RakManagementController@index');
+        Route::get('/create', 'Karyawan\RakManagementController@create');
+        Route::post('/store', 'Karyawan\RakManagementController@store');
+        Route::get('/{id}/edit', 'Karyawan\RakManagementController@edit');
+        Route::put('/update/{id}', 'Karyawan\RakManagementController@update');
+        Route::put('/pass/{id}', 'Karyawan\RakManagementController@pass');
+        Route::delete('/{id}', 'Karyawan\RakManagementController@destroy');
+    });
+});
