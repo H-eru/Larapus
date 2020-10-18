@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'author', 'tahun', 'sinopsis', 'cover', 'rak_id'];
+    protected $fillable = ['title', 'author', 'tahun', 'sinopsis', 'cover', 'rak_id', 'penerbit', 'genre'];
 
-    public function post()
+    public function raks()
     {
-        return $this->belongsTo('App\Rak');
+        return $this->belongsTo('App\Rak', 'rak_id');
     }
 }

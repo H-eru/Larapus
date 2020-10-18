@@ -32,4 +32,15 @@ Route::group(['prefix' => 'karyawan'], function () {
         Route::put('/pass/{id}', 'Karyawan\RakManagementController@pass');
         Route::delete('/{id}', 'Karyawan\RakManagementController@destroy');
     });
+
+    Route::group(['prefix' => 'book'], function () {
+        Route::get('/', 'Karyawan\BookController@index');
+        Route::get('/create', 'Karyawan\BookController@create');
+        Route::post('/store', 'Karyawan\BookController@store');
+        Route::get('/{id}/edit', 'Karyawan\BookController@edit');
+        Route::put('/update/{id}', 'Karyawan\BookController@update');
+        Route::put('/pass/{id}', 'Karyawan\BookController@pass');
+        Route::delete('/{id}', 'Karyawan\BookController@destroy');
+        Route::get('/{id}/show', 'Karyawan\BookController@show');
+    });
 });

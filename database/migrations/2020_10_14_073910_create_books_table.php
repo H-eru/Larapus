@@ -17,9 +17,11 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
+            $table->string('penerbit');
             $table->string('tahun');
-            $table->string('sinopsis');
+            $table->text('sinopsis');
             $table->string('cover');
+            $table->string('genre');
             $table->unsignedBigInteger('rak_id');
 
             $table->foreign('rak_id')->references('id')->on('raks');
