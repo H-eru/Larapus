@@ -1,4 +1,8 @@
 @extends('layouts.adminLayout')
+@push('plugincss')
+<script src="https://raw.githubusercontent.com/lcdsantos/jQuery-Selectric/master/public/selectric.css"></script>
+<link href="{{url('assets/js/selectric.css')}}" rel="stylesheet">
+@endpush
 @section('user', 'active')
 @section('konten')
 <div class="row">
@@ -28,11 +32,26 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label for="nohp">No HP</label>
+                        <input type="text" name="nohp" id="nohp" value="{{$user->nohp}}"
+                            class="form-control @error('nohp') is-invalid @enderror" placeholder="Input No HP">
+                        @error('nohp')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label>Role</label>
                         <select class="custom-select" name="role">
                             <option>{{$user->role}}</option>
                             <option value="Admin">Admin</option>
                             <option value="Karyawan">Karyawan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status Keaktifan</label>
+                        <select class="custom-select" name="is_active">
+                            <option value="true">Aktif</option>
+                            <option value="false">Non Aktif</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -77,3 +96,11 @@
     </div>
 </div>
 @endsection
+@push('pluginjs')
+<script src="{{url('assets/js/jquery.selectric.min.js')}}"></script>
+<script>
+    $(function() {
+  $('select').selectric();
+});
+</script>
+@endpush

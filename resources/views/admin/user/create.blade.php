@@ -1,4 +1,8 @@
 @extends('layouts.adminLayout')
+@push('plugincss')
+<script src="https://raw.githubusercontent.com/lcdsantos/jQuery-Selectric/master/public/selectric.css"></script>
+<link href="{{url('assets/js/selectric.css')}}" rel="stylesheet">
+@endpush
 @section('user', 'active')
 @section('konten')
 <div class="col-md-6 col-sm-12">
@@ -7,7 +11,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Tambah Data</h6>
         </div>
         <div class="card-body">
-            <form action="{{url('admin/user/store')}}" method="POST">
+            <form action="{{url('admin/user/store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama Lengkap</label>
@@ -34,11 +38,26 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Role</label>
-                    <select class="custom-select" name="role">
+                    <label for="nohp">No HP</label>
+                    <input type="text" name="nohp" id="nohp" class="form-control @error('nohp') is-invalid @enderror"
+                        placeholder="Input No HP">
+                    @error('nohp')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="role">Rak</label>
+                    <select class="form-control" id="role" name="role">
                         <option value="Admin">Admin</option>
-                        <option value="Karyawan">Karyawan</option>
+                        <option value="Pustakawan">Pustakawan</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>Foto</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="foto">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary float-right">Tambah</button>
@@ -48,3 +67,17 @@
     </div>
 </div>
 @endsection
+@push('pluginjs')
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+<script src="{{url('assets/js/jquery.selectric.min.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+    bsCustomFileInput.init()
+  });
+
+  $(function() {
+  $('select').selectric();
+});
+</script>
+@endpush

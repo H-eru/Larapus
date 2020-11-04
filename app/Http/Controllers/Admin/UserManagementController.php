@@ -5,13 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserManagementController extends Controller
 {
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Jakarta");
+        setlocale(LC_TIME, 'id_ID.UTF-8', 'Indonesian_indonesia.1252', 'Indonesian');
+    }
+
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::get();
         return view('admin.user.index', compact('users'));
     }
 
@@ -24,14 +32,30 @@ class UserManagementController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required',
+            'username' => 'required|without_spaces',
             'password' => 'required',
-            'role' => 'required'
+            'role' => 'required',
+            'nohp' => 'required',
+            'foto' => 'required'
         ]);
 
+        // create custom id_anggota
+        $getRole = substr(strtoupper($request->role), 0, 2);
+        $id_anggota = $getRole . '-' . date('dmY') . '-' . substr(time(), -5);
+
+        $file = $request->file('foto');
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+
+        // merging the request
+        $request = new Request($request->all());
         $request->merge([
             'password' => Hash::make($request->password),
+            'is_active' => 'true',
+            'id_anggota' => $id_anggota,
+            'foto' => $nama_file,
         ]);
+
+        Storage::putFileAs('foto', new File($file), $nama_file);
 
         User::create($request->all());
         return redirect('admin/user')->withToastSuccess('Data Created Successfully!');
@@ -48,13 +72,17 @@ class UserManagementController extends Controller
         $request->validate([
             'name' => 'required',
             'username' => 'required',
-            'role' => 'required'
+            'nohp' => 'required',
+            'role' => 'required',
+            'is_active' => 'required',
         ]);
 
         User::where('id', $id)->update([
             'name' => $request->name,
             'username' => $request->username,
-            'role' => $request->role
+            'nohp' => $request->nohp,
+            'role' => $request->role,
+            'is_active' => $request->is_active,
         ]);
         return redirect('admin/user')->withToastInfo('Data Updated Successfully!');
     }
