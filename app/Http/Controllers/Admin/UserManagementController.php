@@ -19,7 +19,7 @@ class UserManagementController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::get();
+        $users = User::paginate(10);
         return view('admin.user.index', compact('users'));
     }
 
@@ -108,5 +108,35 @@ class UserManagementController extends Controller
     {
         User::find($id)->delete();
         return redirect('admin/user')->withToastWarning('Data Deleted Successfully!');
+    }
+
+    public function search(Request $request)
+    {
+        $filters = [
+            'id_anggota' => $request->id_anggota,
+            'name'    => $request->name,
+        ];
+
+        $users = User::where(function ($query) use ($filters) {
+            if ($filters['id_anggota']) {
+                $query->where('id_anggota', 'like', '%' . $filters['id_anggota'] . '%');
+            }
+            if ($filters['name']) {
+                $query->where('name', 'like', '%' . $filters['name'] . '%');
+            }
+        })->paginate(10);
+
+        return view('admin.user.index', compact('users'));
+    }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        if ($user->is_active == 'true') {
+            $status  = 'Aktif';
+        } elseif ($user->is_active == 'false') {
+            $status  = 'Non Aktif';
+        }
+        return view('admin/user/show', compact('user', 'status'));
     }
 }

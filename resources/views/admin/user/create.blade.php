@@ -46,7 +46,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="role">Rak</label>
+                    <label for="role">Role</label>
                     <select class="form-control" id="role" name="role">
                         <option value="Admin">Admin</option>
                         <option value="Pustakawan">Pustakawan</option>

@@ -1,36 +1,45 @@
 @extends('layouts.adminLayout')
-@push('plugincss')
-<link href="{{url('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-@endpush
 @section('user', 'active')
 @section('konten')
 <h1 class="h3 mb-4 text-gray-800">Data User</h1>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <a href="{{url('admin/user/create')}}" class="btn btn-primary">Tambah User</a>
+        <form action="{{url('admin/user/search')}}" method="POST" class="row">
+            @csrf
+            <div class="col">
+                <input class="form-control" type="text" name="id_anggota" placeholder="ID Anggota">
+            </div>
+            <div class="col">
+                <input class="form-control" type="text" name="name" placeholder="Nama Karyawan">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success"><i class="fas fa-search"></i>&nbsp; Cari</button>
+            </div>
+        </form>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Username</th>
+                        <th>ID Anggota</th>
                         <th>Nama Karyawan</th>
                         <th>Role</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $no => $user)
+                    @foreach ($users as $user)
                     <tr>
-                        <td>{{$no+1}}</td>
-                        <td>{{$user->username}}</td>
+                        <td>{{$user->id_anggota}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->role}}</td>
                         <td>
-                            <a class="btn btn-warning btn-sm mx-1" href="user/{{$user->id}}/edit">Edit</a>
-                            <form action="user/{{$user->id}}" method="POST" class="d-inline mx-1">
+                            <a class="btn btn-info btn-sm mx-1"
+                                href="{{url('admin/user/'.$user->id.'/show')}}">Lihat</a>
+                            <a class="btn btn-warning btn-sm mx-1"
+                                href="{{url('admin/user/'.$user->id.'/edit')}}">Edit</a>
+                            <form action="{{url('admin/user/'.$user->id)}}" method="POST" class="d-inline mx-1">
                                 @method('delete')
                                 @csrf
                                 <button class="btn btn-danger btn-sm" type="submit"
@@ -41,17 +50,11 @@
                     @endforeach
                 </tbody>
             </table>
+            <a href="{{url('admin/user/create')}}" class="btn btn-primary">Tambah User</a>
+            <div class="float-right">
+                {{ $users->links() }}
+            </div>
         </div>
     </div>
 </div>
 @endsection
-@push('pluginjs')
-<script src="{{url('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{url('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-<script>
-    $(document).ready(function() {
-    $('#dataTable').DataTable();
-    
-} );
-</script>
-@endpush

@@ -17,6 +17,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/update/{id}', 'Admin\UserManagementController@update');
         Route::put('/pass/{id}', 'Admin\UserManagementController@pass');
         Route::delete('/{id}', 'Admin\UserManagementController@destroy');
+        Route::post('/search', 'Admin\UserManagementController@search');
+        Route::get('/{id}/show', 'Admin\UserManagementController@show');
     });
 });
 
