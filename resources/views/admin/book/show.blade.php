@@ -24,14 +24,11 @@
 @section('book', 'active')
 @section('konten')
 <h1 class="h3 mb-4 text-gray-800">Data Buku</h1>
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Data Buku</h6>
-    </div>
+<div class="card shadow">
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{url('cover')}}/{{$book->cover}}">
+                <img src="{{asset('books/'.$book->cover)}}">
             </div>
             <div class="col-md-8">
                 <table>
@@ -80,6 +77,9 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="card-footer">
+        <a href="{{url('admin/book')}}" class="btn btn-secondary">Kembali</a>
     </div>
 </div>
 @endsection

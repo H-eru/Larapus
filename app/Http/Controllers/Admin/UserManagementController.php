@@ -106,7 +106,9 @@ class UserManagementController extends Controller
 
     public function destroy($id)
     {
-        User::find($id)->delete();
+        $del = User::find($id);
+        Storage::delete('foto/' . $del->foto);
+        $del->delete();
         return redirect('admin/user')->withToastWarning('Data Deleted Successfully!');
     }
 

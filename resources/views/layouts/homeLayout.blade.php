@@ -19,6 +19,11 @@
 
     <!-- Custom styles for this template-->
     <link href="{{url('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <style>
+        .ungu {
+            color: #892cdc;
+        }
+    </style>
     @stack('plugincss')
 
 </head>
@@ -27,65 +32,6 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/admin')}}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item @yield('dash')">
-                <a class="nav-link" href="{{('/admin')}}">
-                    <i class="fas fa-fw fa-home"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Data
-            </div>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item @yield('user')">
-                <a class="nav-link" href="{{url('admin/user')}}">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Data Karyawan</span></a>
-            </li>
-
-            <li class="nav-item @yield('rak')">
-                <a class="nav-link" href="{{url('admin/rak')}}">
-                    <i class="fas fa-fw fa-cubes"></i>
-                    <span>Data Rak</span></a>
-            </li>
-
-            <li class="nav-item @yield('book')">
-                <a class="nav-link" href="{{url('admin/book')}}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Data Buku</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
-        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -104,11 +50,26 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link font-weight-bold" href="#" style="color: #892cdc">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link font-weight-bold" href="{{url('login.blade.php')}}"
+                                style="color: #892cdc">
+                                Login
+                            </a>
+                        </li>
+
+
+                        @if (Auth::check())
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline ungu font-weight-bold">Valerie Luna</span>
                                 <img class="img-profile rounded-circle"
                                     src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
@@ -121,6 +82,7 @@
                                 </a>
                             </div>
                         </li>
+                        @endif
 
                     </ul>
 

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -20,6 +20,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/search', 'Admin\UserManagementController@search');
         Route::get('/{id}/show', 'Admin\UserManagementController@show');
     });
+
+    Route::resources([
+        'rak' => 'Admin\RakManagementController',
+        'book' => 'Admin\BookController'
+    ]);
 });
 
 Route::group(['prefix' => 'karyawan'], function () {
