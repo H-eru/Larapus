@@ -50,6 +50,7 @@
                     <div class="form-group">
                         <label>Status Keaktifan</label>
                         <select class="custom-select" name="is_active">
+                            <option value="{{$user->is_active}}">{{$status}}</option>
                             <option value="true">Aktif</option>
                             <option value="false">Non Aktif</option>
                         </select>

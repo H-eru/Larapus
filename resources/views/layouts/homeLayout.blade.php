@@ -23,6 +23,10 @@
         .ungu {
             color: #892cdc;
         }
+
+        .aktif {
+            color: orange !important;
+        }
     </style>
     @stack('plugincss')
 
@@ -42,27 +46,10 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link font-weight-bold" href="#" style="color: #892cdc">
-                                Home
-                            </a>
-                        </li>
-
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link font-weight-bold" href="{{url('login.blade.php')}}"
-                                style="color: #892cdc">
-                                Login
-                            </a>
-                        </li>
-
+                        @yield('pages')
 
                         @if (Auth::check())
                         <!-- Nav Item - User Information -->
@@ -81,6 +68,12 @@
                                     Logout
                                 </a>
                             </div>
+                        </li>
+                        @else
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link font-weight-bold" href="{{url('login')}}" style="color: #892cdc">
+                                Login
+                            </a>
                         </li>
                         @endif
 
@@ -136,7 +129,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{url('logout')}}">Logout</a>
                 </div>
             </div>
         </div>

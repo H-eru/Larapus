@@ -25,6 +25,7 @@
                         <th>ID Anggota</th>
                         <th>Nama Karyawan</th>
                         <th>Role</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -34,6 +35,11 @@
                         <td>{{$user->id_anggota}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->role}}</td>
+                        @if ($user->is_active == 'true')
+                        <td>Aktif</td>
+                        @elseif($user->is_active == 'false')
+                        <td>Non Aktif</td>
+                        @endif
                         <td>
                             <a class="btn btn-info btn-sm mx-1"
                                 href="{{url('admin/user/'.$user->id.'/show')}}">Lihat</a>

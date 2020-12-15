@@ -22,6 +22,8 @@ class CreateBooksTable extends Migration
             $table->text('sinopsis');
             $table->string('cover');
             $table->string('genre');
+            $table->string('stok');
+            $table->string('stok_now');
             $table->unsignedBigInteger('rak_id');
 
             $table->foreign('rak_id')->references('id')->on('raks');

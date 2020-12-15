@@ -1,13 +1,24 @@
 @extends('layouts.adminLayout')
-@push('plugincss')
-<link href="{{url('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-@endpush
 @section('book', 'active')
 @section('konten')
 <h1 class="h3 mb-4 text-gray-800">Data Buku</h1>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <a href="{{url('admin/book/create')}}" class="btn btn-primary">Tambah Buku</a>
+        <form action="{{url('admin/book/search')}}" method="POST" class="row">
+            @csrf
+            <div class="col">
+                <input class="form-control" type="text" name="title" placeholder="Judul Buku">
+            </div>
+            <div class="col">
+                <input class="form-control" type="text" name="author" placeholder="Nama Pengarang">
+            </div>
+            <div class="col">
+                <input class="form-control" type="text" name="penerbit" placeholder="Nama Penerbit">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success"><i class="fas fa-search"></i>&nbsp; Cari</button>
+            </div>
+        </form>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -18,6 +29,7 @@
                         <th>Pengarang</th>
                         <th>Penerbit</th>
                         <th>Tahun Terbit</th>
+                        <th>Ketersediaan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -28,6 +40,7 @@
                         <td>{{$book->author}}</td>
                         <td>{{$book->penerbit}}</td>
                         <td>{{$book->tahun}}</td>
+                        <td>{{$book->stok_now}}</td>
                         <td>
                             <a class="btn btn-info btn-sm mx-1" href="{{url('admin/book/'.$book->id)}}">Lihat</a>
                             <a class="btn btn-warning btn-sm mx-1"
@@ -43,17 +56,11 @@
                     @endforeach
                 </tbody>
             </table>
+            <a href="{{url('admin/book/create')}}" class="btn btn-primary">Tambah Buku</a>
+            <div class="float-right">
+                {{ $books->links() }}
+            </div>
         </div>
     </div>
 </div>
 @endsection
-@push('pluginjs')
-<script src="{{url('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{url('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-<script>
-    $(document).ready(function() {
-    $('#dataTable').DataTable();
-    
-} );
-</script>
-@endpush

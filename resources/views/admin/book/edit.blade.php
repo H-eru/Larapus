@@ -54,8 +54,9 @@
                 <div class="form-group">
                     <label for="tahun">Tahun</label>
                     <input type="number" name="tahun" id="tahun"
-                        class="form-control @error('tahun') is-invalid @enderror" placeholder="Input Tahun" min="0"
-                        value="{{$book->tahun}}" step="0" required>
+                        class="form-control @error('tahun') is-invalid @enderror" placeholder="Input Tahun"
+                        value="{{$book->tahun}}" min="1" step="1"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" title="Numbers only" required>
                     @error('tahun')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -94,6 +95,20 @@
                         <input type="file" class="custom-file-input" id="customFile" name="cover">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="penerbit">Jumlah Stock</label>
+                    <input type="number" value="{{$book->stok}}" disabled class="form-control"
+                        placeholder="Input Penerbit" required>
+                </div>
+                <div class="form-group">
+                    <label for="stok">Tambah Stock Baru</label>
+                    <input type="number" name="stok" id="stok" class="form-control @error('stok') is-invalid @enderror"
+                        placeholder="Input stok baru" min="1" step="1"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" title="Numbers only">
+                    @error('stok')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <a href="{{url('admin/book')}}" class="btn btn-secondary">Kembali</a>

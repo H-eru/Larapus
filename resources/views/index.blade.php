@@ -10,6 +10,14 @@
     }
 </style>
 @endpush
+@section('pages')
+<li class="nav-item dropdown no-arrow mx-1">
+    <a class="nav-link font-weight-bold aktif" href="{{url('/')}}">
+        Home
+    </a>
+</li>
+@endsection
+
 @section('konten')
 <div class="col-md-12 col-sm-12">
     <div class="card shadow mb-4">
@@ -18,7 +26,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12 px-5 py-3">
                     <div class="card shadow-sm">
-                        <a href="search.blade.php" class="card-link">
+                        <a href="{{url('search')}}" class="card-link">
                             <div class="card-body">
                                 <img src="{{url('assets/img/search.png')}}" class="img img-fluid zoom">
                                 <h4 class="text-center font-weight-bold ungu">Pencarian Buku</h4>
@@ -29,7 +37,7 @@
 
                 <div class="col-md-6 col-sm-12 px-5 py-3">
                     <div class="card shadow-sm">
-                        <a href="list.blade.php" class="card-link">
+                        <a href="{{url('list')}}" class="card-link">
                             <div class="card-body">
                                 <img src="{{url('assets/img/stack.png')}}" class="img img-fluid zoom">
                                 <h4 class="text-center font-weight-bold ungu">List Buku</h4>

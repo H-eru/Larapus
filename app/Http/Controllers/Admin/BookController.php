@@ -13,7 +13,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
+        $books = Book::paginate(10);
         return view('admin/book/index', compact('books'));
     }
 
@@ -33,16 +33,19 @@ class BookController extends Controller
             'sinopsis' => 'required',
             'cover' => 'required',
             'genre' => 'required',
-            'rak_id' => 'required'
+            'rak_id' => 'required',
+            'stok' => 'required'
         ]);
 
         $file = $request->file('cover');
         $nama_file = time() . "_" . $file->getClientOriginalName();
         Storage::putFileAs('books', new File($file), $nama_file);
 
+        $stok_now = $request->stok;
         $request = new Request($request->all());
         $request->merge([
             'cover' => $nama_file,
+            'stok_now' => $stok_now,
         ]);
 
         Book::create($request->all());
@@ -89,7 +92,9 @@ class BookController extends Controller
                 'sinopsis' => $request->sinopsis,
                 'cover' => $nama_file,
                 'genre' => $request->genre,
-                'rak_id' => $request->rak_id
+                'rak_id' => $request->rak_id,
+                'stok' => $cek->stok + $request->stok,
+                'stok_now' => $cek->stok_now + $request->stok
             ]);
             return redirect('admin/book')->withToastInfo('Data Updated Successfully!');
         } else {
@@ -100,7 +105,9 @@ class BookController extends Controller
                 'tahun' => $request->tahun,
                 'sinopsis' => $request->sinopsis,
                 'genre' => $request->genre,
-                'rak_id' => $request->rak_id
+                'rak_id' => $request->rak_id,
+                'stok' => $cek->stok + $request->stok,
+                'stok_now' => $cek->stok_now + $request->stok
             ]);
             return redirect('admin/book')->withToastInfo('Data Updated Successfully!');
         }
@@ -123,5 +130,28 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         return view('admin/book/show', compact('book'));
+    }
+
+    public function search(Request $request)
+    {
+        $filters = [
+            'title' => $request->title,
+            'author'    => $request->author,
+            'penerbit'    => $request->penerbit,
+        ];
+
+        $books = Book::where(function ($query) use ($filters) {
+            if ($filters['title']) {
+                $query->where('title', 'like', '%' . $filters['title'] . '%');
+            }
+            if ($filters['author']) {
+                $query->where('author', 'like', '%' . $filters['author'] . '%');
+            }
+            if ($filters['penerbit']) {
+                $query->where('penerbit', 'like', '%' . $filters['penerbit'] . '%');
+            }
+        })->paginate(10);
+
+        return view('admin.book.index', compact('books'));
     }
 }

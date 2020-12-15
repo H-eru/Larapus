@@ -42,8 +42,9 @@
                 <div class="form-group">
                     <label for="tahun">Tahun</label>
                     <input type="number" name="tahun" id="tahun"
-                        class="form-control @error('tahun') is-invalid @enderror" placeholder="Input Tahun" min="0"
-                        step="0" required>
+                        class="form-control @error('tahun') is-invalid @enderror" placeholder="Input Tahun" min="1"
+                        step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" title="Numbers only"
+                        required>
                     @error('tahun')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -61,6 +62,16 @@
                     <input type="text" name="genre" id="genre" class="form-control @error('genre') is-invalid @enderror"
                         placeholder="Input Genre">
                     @error('genre')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="stok">Jumlah</label>
+                    <input type="number" min="1" step="1"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57" title="Numbers only"
+                        name="stok" id="stok" class="form-control @error('stok') is-invalid @enderror"
+                        placeholder="Input jumlah buku">
+                    @error('stok')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

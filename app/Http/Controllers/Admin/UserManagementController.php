@@ -64,7 +64,12 @@ class UserManagementController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.user.edit', compact('user'));
+        if ($user->is_active == 'true') {
+            $status  = 'Aktif';
+        } elseif ($user->is_active == 'false') {
+            $status  = 'Non Aktif';
+        }
+        return view('admin.user.edit', compact('user', 'status'));
     }
 
     public function update(Request $request, $id)

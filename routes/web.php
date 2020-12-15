@@ -6,6 +6,11 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('search', 'HomeController@search');
+Route::post('search', 'HomeController@find');
+Route::get('show', 'HomeController@show');
+Route::get('list', 'HomeController@list');
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'Admin\DashboardAdminController@index');
 
@@ -21,6 +26,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/{id}/show', 'Admin\UserManagementController@show');
     });
 
+    Route::post('/book/search', 'Admin\BookController@search');
     Route::resources([
         'rak' => 'Admin\RakManagementController',
         'book' => 'Admin\BookController'
