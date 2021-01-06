@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Admin</title>
+    <title>Larapus</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{url('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -56,9 +56,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline ungu font-weight-bold">Valerie Luna</span>
-                                <img class="img-profile rounded-circle"
-                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                <span
+                                    class="mr-2 d-none d-lg-inline ungu font-weight-bold">{{Auth::user()->name}}</span>
+                                <img class="img-profile rounded-circle" src="{{asset('foto/'.Auth::user()->foto)}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -71,7 +71,8 @@
                         </li>
                         @else
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link font-weight-bold" href="{{url('login')}}" style="color: #892cdc">
+                            <a class="nav-link font-weight-bold @yield('login')" href="{{url('login')}}"
+                                style="color: #892cdc">
                                 Login
                             </a>
                         </li>
@@ -121,12 +122,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Logout</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Tekan tombol "Logout" dibawah untuk mengakhiri sesi</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{url('logout')}}">Logout</a>

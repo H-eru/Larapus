@@ -45,6 +45,7 @@
                             <option>{{$user->role}}</option>
                             <option value="Admin">Admin</option>
                             <option value="Karyawan">Karyawan</option>
+                            <option value="Anggota">Anggota</option>
                         </select>
                     </div>
                     <div class="form-group">

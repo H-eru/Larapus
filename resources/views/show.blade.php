@@ -41,7 +41,7 @@
 @section('konten')
 <h2 class="text-center font-weight-bold ungu pt-3">Hasil Pencarian</h2>
 
-@if ($books[0] == '')
+@if ($res == false)
 <div class="col-md-8 col-sm-12 p-4 mx-auto">
     <div class="card shadow-sm text-center mb-4">
         <div class="card-body">
@@ -55,6 +55,11 @@
     @foreach ($books as $book)
     <div class="col-md-6 col-sm-12 px-4">
         <div class="card shadow mb-4">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    {{$book->title}}
+                </h6>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4 py-2 px-3">
@@ -62,11 +67,6 @@
                     </div>
                     <div class="col-md-8">
                         <table>
-                            <tr>
-                                <td>Judul</td>
-                                <td> : </td>
-                                <td>{{$book->title}}</td>
-                            </tr>
                             <tr>
                                 <td>Pengarang</td>
                                 <td> : </td>
@@ -107,6 +107,15 @@
                         </table>
                     </div>
                 </div>
+                {{-- belum --}}
+                @if (Auth::check())
+                <div class="float-right">
+                    <form action="{{url('cart')}}/{{$book->id}}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary">Pinjam</button>
+                    </form>
+                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -50,12 +50,13 @@
                     <select class="form-control" id="role" name="role">
                         <option value="Admin">Admin</option>
                         <option value="Pustakawan">Pustakawan</option>
+                        <option value="Anggota">Anggota</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Foto</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="foto">
+                        <input type="file" class="custom-file-input" id="customFile" name="foto" required>
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>

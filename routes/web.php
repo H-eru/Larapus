@@ -6,12 +6,19 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('login', function () {
+    return view('login');
+})->middleware('guest')->name('login');
+
+Route::post('authenticate', 'AuthController@authenticate');
+Route::get('logout', 'AuthController@logout');
+
 Route::get('search', 'HomeController@search');
 Route::post('search', 'HomeController@find');
 Route::get('show', 'HomeController@show');
 Route::get('list', 'HomeController@list');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', 'Admin\DashboardAdminController@index');
 
     Route::group(['prefix' => 'user'], function () {
@@ -33,7 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
     ]);
 });
 
-Route::group(['prefix' => 'karyawan'], function () {
+Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'karyawan']], function () {
     Route::get('/', 'Karyawan\DashboardKaryawanController@index');
 
     Route::group(['prefix' => 'rak'], function () {

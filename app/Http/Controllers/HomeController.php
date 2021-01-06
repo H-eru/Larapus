@@ -39,6 +39,11 @@ class HomeController extends Controller
                 $query->where('tahun', 'like', '%' . $filters['tahun'] . '%');
             }
         })->paginate(10);
-        return view('show', compact('books'));
+
+        $res = true;
+        if ($filters['title'] == null && $filters['author'] == null && $filters['penerbit'] == null && $filters['genre'] == null && $filters['tahun'] == null || $books[0] == '') {
+            $res = false;
+        }
+        return view('show', compact('books', 'res'));
     }
 }
