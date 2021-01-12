@@ -56,7 +56,11 @@
                 <div class="form-group">
                     <label>Foto</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="foto" required>
+                        <input type="file" class="custom-file-input @error('foto') is-invalid @enderror" id="customFile"
+                            name="foto" required>
+                        @error('foto')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>

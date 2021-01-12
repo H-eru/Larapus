@@ -36,7 +36,7 @@ class UserManagementController extends Controller
             'password' => 'required',
             'role' => 'required',
             'nohp' => 'required',
-            'foto' => 'required'
+            'foto' => 'required|mimes:jpeg,jpg,png,JPG,JPEG,PNG'
         ]);
 
         // create custom id_anggota

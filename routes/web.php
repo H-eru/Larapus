@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Home route
 Route::get('/', function () {
     return view('index');
 });
@@ -10,14 +11,21 @@ Route::get('login', function () {
     return view('login');
 })->middleware('guest')->name('login');
 
-Route::post('authenticate', 'AuthController@authenticate');
-Route::get('logout', 'AuthController@logout');
+Route::get('register', function () {
+    return view('register');
+})->middleware('guest')->name('register');
 
 Route::get('search', 'HomeController@search');
 Route::post('search', 'HomeController@find');
 Route::get('show', 'HomeController@show');
 Route::get('list', 'HomeController@list');
 
+// Authentication & registration
+Route::post('register', 'AuthController@register');
+Route::post('authenticate', 'AuthController@authenticate');
+Route::get('logout', 'AuthController@logout');
+
+// Admin Dashboard
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', 'Admin\DashboardAdminController@index');
 
@@ -40,6 +48,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     ]);
 });
 
+// Karyawan Dashboard
 Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'karyawan']], function () {
     Route::get('/', 'Karyawan\DashboardKaryawanController@index');
 

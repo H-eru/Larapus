@@ -27,6 +27,16 @@
         .aktif {
             color: orange !important;
         }
+
+        .logo {
+            width: 200px;
+        }
+
+        @media(max-width:580px) {
+            .logo {
+                display: none;
+            }
+        }
     </style>
     @stack('plugincss')
 
@@ -45,7 +55,13 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+                    <ul class="navbar-nav mr-auto">
+                        <li>
+                            <a href="{{url('/')}}">
+                                <img src="{{url('assets/img/logo_long.png')}}" class="img img-fluid logo mx-4">
+                            </a>
+                        </li>
+                    </ul>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 

@@ -33,8 +33,9 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/admin')}}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    {{-- <i class="fas fa-laugh-wink"></i> --}}
+                    <img src="{{url('assets/img/logos.png')}}" class="img img-fluid">
                 </div>
                 <div class="sidebar-brand-text mx-3">Larapus</div>
             </a>
@@ -173,7 +174,7 @@
                 <div class="modal-body">Tekan tombol "Logout" dibawah untuk mengakhiri sesi</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{url('logout')}}">Logout</a>
                 </div>
             </div>
         </div>
