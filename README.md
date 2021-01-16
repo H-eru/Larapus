@@ -1,8 +1,10 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/assets/img/logo_long.png" width="400"></a></p>
+<p align="center"><img src="public/assets/img/logo_long.png" width="400"></p>
 
 ## About Larapus
 
 Larapus is a library management system built with Laravel 7
+
+<p align="center"><img src="public/assets/img/readme.png" ></p>
 
 ## Features
 

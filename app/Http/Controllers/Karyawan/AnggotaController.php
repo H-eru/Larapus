@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Karyawan;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Http\File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class UserManagementController extends Controller
+class AnggotaController extends Controller
 {
     public function __construct()
     {
@@ -31,13 +31,14 @@ class UserManagementController extends Controller
             if ($filters['name']) {
                 $query->where('name', 'like', '%' . $filters['name'] . '%');
             }
+            $query->where('role', '=', 'Anggota');
         })->paginate(10);
-        return view('admin.user.index', compact('users'));
+        return view('karyawan.user.index', compact('users'));
     }
 
     public function create()
     {
-        return view('admin.user.create');
+        return view('karyawan/user/create');
     }
 
     public function store(Request $request)
@@ -46,14 +47,12 @@ class UserManagementController extends Controller
             'name' => 'required',
             'username' => 'required|without_spaces',
             'password' => 'required',
-            'role' => 'required',
             'nohp' => 'required',
             'foto' => 'required|mimes:jpeg,jpg,png,JPG,JPEG,PNG'
         ]);
 
         // create custom id_anggota
-        $getRole = substr(strtoupper($request->role), 0, 2);
-        $id_anggota = $getRole . '-' . date('dmY') . '-' . substr(time(), -5);
+        $id_anggota = 'AN' . '-' . date('dmY') . '-' . substr(time(), -5);
 
         $file = $request->file('foto');
         $nama_file = time() . "_" . $file->getClientOriginalName();
@@ -65,66 +64,13 @@ class UserManagementController extends Controller
             'is_active' => 'true',
             'id_anggota' => $id_anggota,
             'foto' => $nama_file,
+            'role' => 'Anggota',
         ]);
 
         Storage::putFileAs('foto', new File($file), $nama_file);
 
         User::create($request->all());
-        return redirect('admin/user')->withToastSuccess('Data Created Successfully!');
-    }
-
-    public function edit($id)
-    {
-        $user = User::find($id);
-        if ($user->is_active == 'true') {
-            $status  = 'Aktif';
-        } elseif ($user->is_active == 'false') {
-            $status  = 'Non Aktif';
-        }
-        return view('admin.user.edit', compact('user', 'status'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'nohp' => 'required',
-            'role' => 'required',
-            'is_active' => 'required',
-        ]);
-
-        User::where('id', $id)->update([
-            'name' => $request->name,
-            'nohp' => $request->nohp,
-            'role' => $request->role,
-            'is_active' => $request->is_active,
-        ]);
-        return redirect('admin/user')->withToastInfo('Data Updated Successfully!');
-    }
-
-    public function pass(Request $request, $id)
-    {
-        $request->validate([
-            'password' => 'required',
-            'password1' => 'required'
-        ]);
-
-        if ($request->password == $request->password1) {
-            User::find($id)->update([
-                'password' => Hash::make($request->password)
-            ]);
-            return redirect('admin/user')->withToastInfo('Data Updated Successfully!');
-        } else {
-            return redirect('admin/user')->withToastError('Data Gagal Update!');
-        }
-    }
-
-    public function destroy($id)
-    {
-        $del = User::find($id);
-        Storage::delete('foto/' . $del->foto);
-        $del->delete();
-        return redirect('admin/user')->withToastWarning('Data Deleted Successfully!');
+        return redirect('karyawan/user')->withToastSuccess('Data Created Successfully!');
     }
 
     public function show($id)
@@ -135,6 +81,41 @@ class UserManagementController extends Controller
         } elseif ($user->is_active == 'false') {
             $status  = 'Non Aktif';
         }
-        return view('admin/user/show', compact('user', 'status'));
+        return view('karyawan/user/show', compact('user', 'status'));
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        if ($user->is_active == 'true') {
+            $status  = 'Aktif';
+        } elseif ($user->is_active == 'false') {
+            $status  = 'Non Aktif';
+        }
+        return view('karyawan.user.edit', compact('user', 'status'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nohp' => 'required',
+            'is_active' => 'required',
+        ]);
+
+        User::where('id', $id)->update([
+            'name' => $request->name,
+            'nohp' => $request->nohp,
+            'is_active' => $request->is_active,
+        ]);
+        return redirect('karyawan/user')->withToastInfo('Data Updated Successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $del = User::findOrFail($id);
+        Storage::delete('foto/' . $del->foto);
+        $del->delete();
+        return redirect('karyawan/user')->withToastWarning('Data Deleted Successfully!');
     }
 }

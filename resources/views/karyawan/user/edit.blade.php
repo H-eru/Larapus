@@ -1,4 +1,4 @@
-@extends('layouts.adminLayout')
+@extends('layouts.karyawanLayout')
 @push('plugincss')
 <script src="https://raw.githubusercontent.com/lcdsantos/jQuery-Selectric/master/public/selectric.css"></script>
 <link href="{{url('assets/js/selectric.css')}}" rel="stylesheet">
@@ -12,7 +12,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit Data</h6>
             </div>
             <div class="card-body">
-                <form action="{{url('admin/user/update')}}/{{$user->id}}" method="POST">
+                <form action="{{url('karyawan/user')}}/{{$user->id}}" method="POST">
                     @csrf
                     @method('put')
                     <div class="form-group">
@@ -32,15 +32,6 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label>Role</label>
-                        <select class="custom-select" name="role">
-                            <option>{{$user->role}}</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Karyawan">Karyawan</option>
-                            <option value="Anggota">Anggota</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label>Status Keaktifan</label>
                         <select class="custom-select" name="is_active">
                             <option value="{{$user->is_active}}">{{$status}}</option>
@@ -49,7 +40,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <a href="{{url('admin/user')}}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{url('karyawan/user')}}" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary float-right">Simpan</button>
                     </div>
                 </form>
@@ -63,7 +54,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit Password</h6>
             </div>
             <div class="card-body">
-                <form action="{{url('admin/user/pass')}}/{{$user->id}}" method="POST">
+                <form action="{{url('karyawan/user/pass')}}/{{$user->id}}" method="POST">
                     @method('put')
                     @csrf
                     <div class="form-group">
@@ -83,7 +74,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <a href="{{url('admin/user')}}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{url('karyawan/user')}}" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary float-right">Simpan</button>
                     </div>
                 </form>

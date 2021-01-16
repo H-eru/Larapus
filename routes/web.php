@@ -41,7 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('/{id}/show', 'Admin\UserManagementController@show');
     });
 
-    Route::post('/book/search', 'Admin\BookController@search');
+    // Route::get('/book/search', 'Admin\BookController@search');
     Route::resources([
         'rak' => 'Admin\RakManagementController',
         'book' => 'Admin\BookController'
@@ -52,24 +52,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'karyawan']], function () {
     Route::get('/', 'Karyawan\DashboardKaryawanController@index');
 
-    Route::group(['prefix' => 'rak'], function () {
-        Route::get('/', 'Karyawan\RakManagementController@index');
-        Route::get('/create', 'Karyawan\RakManagementController@create');
-        Route::post('/store', 'Karyawan\RakManagementController@store');
-        Route::get('/{id}/edit', 'Karyawan\RakManagementController@edit');
-        Route::put('/update/{id}', 'Karyawan\RakManagementController@update');
-        Route::put('/pass/{id}', 'Karyawan\RakManagementController@pass');
-        Route::delete('/{id}', 'Karyawan\RakManagementController@destroy');
-    });
+    Route::resources([
+        'user' => 'Karyawan\AnggotaController',
+    ]);
 
-    Route::group(['prefix' => 'book'], function () {
-        Route::get('/', 'Karyawan\BookController@index');
-        Route::get('/create', 'Karyawan\BookController@create');
-        Route::post('/store', 'Karyawan\BookController@store');
-        Route::get('/{id}/edit', 'Karyawan\BookController@edit');
-        Route::put('/update/{id}', 'Karyawan\BookController@update');
-        Route::put('/pass/{id}', 'Karyawan\BookController@pass');
-        Route::delete('/{id}', 'Karyawan\BookController@destroy');
-        Route::get('/{id}/show', 'Karyawan\BookController@show');
-    });
+    // Route::group(['prefix' => 'user'], function () {
+    //     Route::get('/', 'Karyawan\AnggotaController@index');
+    //     Route::get('/create', 'Karyawan\AnggotaController@create');
+    //     Route::post('/store', 'Karyawan\AnggotaController@store');
+    //     Route::get('/{id}/edit', 'Karyawan\AnggotaController@edit');
+    //     Route::put('/update/{id}', 'Karyawan\AnggotaController@update');
+    //     Route::put('/pass/{id}', 'Karyawan\AnggotaController@pass');
+    //     Route::delete('/{id}', 'Karyawan\AnggotaController@destroy');
+    // });
 });

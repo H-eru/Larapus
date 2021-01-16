@@ -57,23 +57,23 @@
                 Data
             </div>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item @yield('rak')">
-                <a class="nav-link" href="{{url('karyawan/rak')}}">
-                    <i class="fas fa-fw fa-cubes"></i>
-                    <span>Data Rak</span></a>
-            </li>
-
-            <li class="nav-item @yield('book')">
-                <a class="nav-link" href="{{url('karyawan/book')}}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Data Buku</span></a>
-            </li>
-
-            <li class="nav-item @yield('peminjam')">
-                <a class="nav-link" href="{{url('karyawan/peminjam')}}">
+            <li class="nav-item @yield('user')">
+                <a class="nav-link" href="{{url('karyawan/user')}}">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Data Peminjam</span></a>
+                    <span>Data Anggota</span></a>
+            </li>
+
+            <li class="nav-item @yield('pinjam')">
+                <a class="nav-link" href="{{url('karyawan/pinjam')}}">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Pinjam Buku</span></a>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item @yield('laporan')">
+                <a class="nav-link" href="{{url('karyawan/laporan')}}">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Laporan Peminjaman</span></a>
             </li>
 
             <!-- Divider -->
