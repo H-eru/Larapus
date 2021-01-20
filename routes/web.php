@@ -29,22 +29,11 @@ Route::get('logout', 'AuthController@logout');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', 'Admin\DashboardAdminController@index');
 
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('/', 'Admin\UserManagementController@index');
-        Route::get('/create', 'Admin\UserManagementController@create');
-        Route::post('/store', 'Admin\UserManagementController@store');
-        Route::get('/{id}/edit', 'Admin\UserManagementController@edit');
-        Route::put('/update/{id}', 'Admin\UserManagementController@update');
-        Route::put('/pass/{id}', 'Admin\UserManagementController@pass');
-        Route::delete('/{id}', 'Admin\UserManagementController@destroy');
-        Route::post('/search', 'Admin\UserManagementController@search');
-        Route::get('/{id}/show', 'Admin\UserManagementController@show');
-    });
-
-    // Route::get('/book/search', 'Admin\BookController@search');
+    Route::put('user/pass/{id}', 'Admin\UserManagementController@pass');
     Route::resources([
         'rak' => 'Admin\RakManagementController',
-        'book' => 'Admin\BookController'
+        'book' => 'Admin\BookController',
+        'user' => 'Admin\UserManagementController'
     ]);
 });
 
@@ -52,8 +41,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 Route::group(['prefix' => 'karyawan', 'middleware' => ['auth', 'karyawan']], function () {
     Route::get('/', 'Karyawan\DashboardKaryawanController@index');
 
+    Route::post('pinjam/{id}/addCart', 'Karyawan\CartController@addCart');
     Route::resources([
         'user' => 'Karyawan\AnggotaController',
+        'pinjam' => 'Karyawan\CartController',
     ]);
 
     // Route::group(['prefix' => 'user'], function () {

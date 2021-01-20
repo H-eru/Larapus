@@ -40,8 +40,7 @@
                         <td>Non Aktif</td>
                         @endif
                         <td>
-                            <a class="btn btn-info btn-sm mx-1"
-                                href="{{url('admin/user/'.$user->id.'/show')}}">Lihat</a>
+                            <a class="btn btn-info btn-sm mx-1" href="{{url('admin/user/'.$user->id)}}">Lihat</a>
                             <a class="btn btn-warning btn-sm mx-1"
                                 href="{{url('admin/user/'.$user->id.'/edit')}}">Edit</a>
                             <form action="{{url('admin/user/'.$user->id)}}" method="POST" class="d-inline mx-1">

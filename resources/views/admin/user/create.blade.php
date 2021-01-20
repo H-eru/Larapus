@@ -11,7 +11,7 @@
             <h6 class="m-0 font-weight-bold text-primary">Tambah Data</h6>
         </div>
         <div class="card-body">
-            <form action="{{url('admin/user/store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('admin/user')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama Lengkap</label>

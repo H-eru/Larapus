@@ -74,7 +74,7 @@ class AuthController extends Controller
         User::create($request->all());
 
         Alert::html('Registrasi Sukses', "ID Anggota anda : <b>$id_anggota</b> <br>
-        Silahkan datang ke perpustakaan dengan membawa <b>foto</b> dan tunjukkan <b>ID Anggota</b> kepada petugas perpustakaan untuk aktivasi akun", 'success')->autoClose(false);;
+        Silahkan datang ke perpustakaan dengan membawa <b>foto</b> dan tunjukkan <b>ID Anggota</b> kepada petugas perpustakaan untuk aktivasi akun", 'success')->autoClose(false);
         return redirect('/');
     }
 }

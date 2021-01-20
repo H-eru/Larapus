@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Crud laravel</title>
+    <title>Larapus - Dashboard Pustakawan</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{url('assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -64,9 +64,19 @@
             </li>
 
             <li class="nav-item @yield('pinjam')">
-                <a class="nav-link" href="{{url('karyawan/pinjam')}}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>Pinjam Buku</span></a>
+                    <span>Pinjam Buku</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Menu Peminjaman</h6>
+                        <a class="collapse-item" href="{{url('karyawan/pinjam')}}">Buat Pinjaman</a>
+                        <a class="collapse-item" href="{{url('karyawan/queue')}}">Daftar Pinjaman</a>
+                        <a class="collapse-item" href="{{url('karyawan/return')}}">Pengembalian</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Charts -->
@@ -103,6 +113,8 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
+                        @yield('cart')
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">

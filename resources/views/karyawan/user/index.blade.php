@@ -22,7 +22,7 @@
                 <thead>
                     <tr>
                         <th>ID Anggota</th>
-                        <th>Nama Karyawan</th>
+                        <th>Nama Anggota</th>
                         <th>No HP</th>
                         <th>Status</th>
                         <th>Aksi</th>

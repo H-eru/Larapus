@@ -4,18 +4,17 @@
 <h1 class="h3 mb-4 text-gray-800">Data Buku</h1>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <form action="{{url('admin/book/search')}}" method="POST" class="row">
-            @csrf
-            <div class="col">
+        <form action="{{url('admin/book')}}" method="GET" class="row">
+            <div class="col-md-3 col-sm-12 my-1">
                 <input class="form-control" type="text" name="title" placeholder="Judul Buku">
             </div>
-            <div class="col">
+            <div class="col-md-3 col-sm-12 my-1">
                 <input class="form-control" type="text" name="author" placeholder="Nama Pengarang">
             </div>
-            <div class="col">
+            <div class="col-md-3 col-sm-12 my-1">
                 <input class="form-control" type="text" name="penerbit" placeholder="Nama Penerbit">
             </div>
-            <div class="col">
+            <div class="col-md-3 col-sm-12 my-1">
                 <button type="submit" class="btn btn-success"><i class="fas fa-search"></i>&nbsp; Cari</button>
             </div>
         </form>
@@ -58,7 +57,7 @@
             </table>
             <a href="{{url('admin/book/create')}}" class="btn btn-primary">Tambah Buku</a>
             <div class="float-right">
-                {{ $books->links() }}
+                {{ $books->appends(Request::all())->links() }}
             </div>
         </div>
     </div>

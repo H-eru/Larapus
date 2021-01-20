@@ -11,10 +11,27 @@ use Illuminate\Http\File;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::paginate(10);
-        return view('admin/book/index', compact('books'));
+        $filters = [
+            'title' => $request->title,
+            'author'    => $request->author,
+            'penerbit'    => $request->penerbit,
+        ];
+
+        $books = Book::where(function ($query) use ($filters) {
+            if ($filters['title']) {
+                $query->where('title', 'like', '%' . $filters['title'] . '%');
+            }
+            if ($filters['author']) {
+                $query->where('author', 'like', '%' . $filters['author'] . '%');
+            }
+            if ($filters['penerbit']) {
+                $query->where('penerbit', 'like', '%' . $filters['penerbit'] . '%');
+            }
+        })->paginate(10);
+
+        return view('admin.book.index', compact('books'));
     }
 
     public function create()
@@ -130,28 +147,5 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         return view('admin/book/show', compact('book'));
-    }
-
-    public function search(Request $request)
-    {
-        $filters = [
-            'title' => $request->title,
-            'author'    => $request->author,
-            'penerbit'    => $request->penerbit,
-        ];
-
-        $books = Book::where(function ($query) use ($filters) {
-            if ($filters['title']) {
-                $query->where('title', 'like', '%' . $filters['title'] . '%');
-            }
-            if ($filters['author']) {
-                $query->where('author', 'like', '%' . $filters['author'] . '%');
-            }
-            if ($filters['penerbit']) {
-                $query->where('penerbit', 'like', '%' . $filters['penerbit'] . '%');
-            }
-        })->paginate(10);
-
-        return view('admin.book.index', compact('books'));
     }
 }

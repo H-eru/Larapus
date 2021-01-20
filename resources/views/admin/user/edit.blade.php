@@ -12,7 +12,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit Data</h6>
             </div>
             <div class="card-body">
-                <form action="{{url('admin/user/update')}}/{{$user->id}}" method="POST">
+                <form action="{{url('admin/user')}}/{{$user->id}}" method="POST">
                     @csrf
                     @method('put')
                     <div class="form-group">
